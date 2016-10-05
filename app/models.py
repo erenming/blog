@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 # Create your models here.
 
@@ -39,6 +40,9 @@ class Article(models.Model):
         # 即当从数据库中取出文章时，以文章最后修改时间逆向排序
         ordering = ['-last_modified_time']
 
+    def get_absolute_url(self):
+        return reverse('app:detail', kwargs={'article_id': self.pk})
+
 class Category(models.Model):
     """
     另外一个表,储存文章的分类信息
@@ -50,3 +54,14 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+class BlogComment(models.Model):
+    user_name = models.CharField('评论者名字', max_length=100)
+    user_email = models.EmailField('评论者邮箱', max_length=255)
+    body = models.TextField('评论内容')
+    created_time = models.DateTimeField('评论发表时间', auto_now_add=True)
+    article = models.ForeignKey('Article', verbose_name='评论所属文章', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.body[:20]
+

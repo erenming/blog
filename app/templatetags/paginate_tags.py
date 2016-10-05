@@ -21,13 +21,13 @@ def paginate(context, object_list, page_count):
         pages = paginator.page_range
 
     except PageNotAnInteger:
-        object_list = paginator.page(1).object_list # 获取首页数据列表
+        object_list = paginator.page(1) # 获取首页数据列表
         context['current_page'] = 1
         pages = paginator.page_range
 
     except EmptyPage:
         # 用户传递的是一个空值，则把最后一页返回给他
-        object_list = paginator.page(paginator.num_pages).object_list
+        object_list = paginator.page(paginator.num_pages)
         # num_pages为总分页数
         context['currten_page'] = paginator.num_pages
         pages = paginator.page_range

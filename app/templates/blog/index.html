@@ -26,14 +26,14 @@
                     <hr>
                     <img class="img-responsive" src="http://placehold.it/900x300" alt="">
                     <hr>
-                    <p>{{ article.body }}</p>
+                    <p>{{ article.body | safe}}</p>
                     <a class="btn btn-primary" href="{% url 'app:detail' article.pk %}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-                    <span class="comments-link"><a href="#">{{ num_comments }} 评论</a></span>
-                    <span class="post-views"><a href="#">{{ article.views }} 阅读</a></span>
+                    <!--<span class="comments-link"><a href="{% url 'app:detail' article.pk%}" >{{ num_comments }} 评论</a></span>-->
+                    <!--<span class="post-views"><a href="#">{{ article.views }} 阅读</a></span>-->
                     <hr>
                 {% endfor %}
             </div>
-            <div style="text_align:center;">
+            <div>
                 {% include 'blog/pagination.html' %}
             </div>
 
