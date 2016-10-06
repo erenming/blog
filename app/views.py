@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from .models import Article, Category
+from .models import Article, Category, BlogComment
 from .forms import BlogCommentForm
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView
@@ -71,31 +71,48 @@ class CategoryView(ListView):
         kwargs['category_list'] = Category.objects.all().order_by('name')
         return super(CategoryView, self).get_context_data(**kwargs)
 
-class CommentPostView(FormView):
-    from_class = BlogCommentForm
-    template_name = 'blog/detail.html'
+# class CommentPostView(FormView):
+#     from_class = BlogCommentForm
+#     template_name = 'blog/detail.html'
+#
+#     def form_valid(self, form):
+#         '''
+#         验证表单数据是否合法
+#         '''
+#         # 根据url传入的参数获取被评论文章
+#         target_article = get_object_or_404(Article, pk=self.kwargs['article_id'])
+#
+#         comment = form.save(commit=False)
+#         comment.article = target_article
+#         comment.save()
+#
+#         self.success_url = target_article.get_absolute_url()
+#         return render(self.request, self.success_url, {'article_id': target_article.pk})
+#
+#
+#     def form_invalid(self, form):
+#
+#         target_article = get_object_or_404(Article, pk=self.kwargs['article_id'])
+#
+#         return render(self.request, 'blog/detail.html', {
+#             'form': form,
+#             'article': target_article,
+#             'comment_list': target_article.blogcomment_set.all(),
+#         })
 
-    def form_valid(self, form):
-        '''
-        验证表单数据是否合法
-        '''
-        # 根据url传入的参数获取被评论文章
-        target_article = get_object_or_404(Article, pk=self.kwargs['article_id'])
+def CommentView(request, article_id):
+    if request.method == 'POST':
+        form = BlogCommentForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['user_name']
+            email = form.cleaned_data['user_email']
+            body = form.cleaned_data['body']
 
-        comment = form.save(commit=False)
-
-        comment.article = target_article
-        comment.save()
-
-        self.success_url = target_article.get_absolute_url()
-        return HttpResponseRedirect(self.success_url)
-
-    def form_invalid(self, form):
-
-        target_article = get_object_or_404(Article, pk=self.kwargs['article_id'])
-
-        return render(self.request, 'blog/detail.html', {
-            'form': form,
-            'article': target_article,
-            'comment_list': target_article.blogcomment_set.all(),
-        })
+            article = get_object_or_404(Article, pk=article_id)
+            new_record = BlogComment(user_name=name,
+                                 user_email=email,
+                                 body=body,
+                                article=article)
+            new_record.save()
+            comment = get_object_or_404(BlogComment, pk=new_record.pk)
+            return redirect('app:detail', article_id=article_id)

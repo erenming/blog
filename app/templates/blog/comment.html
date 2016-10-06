@@ -1,1 +1,21 @@
 
+<div class="col-sm-8 col-md-8 col-md-offset-2">
+    <p class="'lead">评论详情</p>
+    <form method="post" action="{% url 'app:comment' article.pk %}">
+        {% csrf_token %}
+            {% for field in form %}
+            {{ field }}
+            {{ field.errors }}
+            <br>
+            {% endfor %}
+        <button type="submit">评论</button>
+    </form>
+    <hr>
+    {% for comment in comment_list %}
+        <span class="'user-nickname">{{ comment.user_name }}</span>
+        <time class="time">{{ comment.created_time }}</time>
+        <div class="comment-content">{{ comment.body }}</div>
+        <div><a href="">回复</a></div>
+    <hr>
+    {% endfor %}
+</div>

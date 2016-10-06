@@ -15,13 +15,13 @@ def paginate(context, object_list, page_count):
     page = context['request'].GET.get('page')
 
     try:
-        object_list = paginator.page(page) # 根据页码号获取数据列表
+        object_list = paginator.page(page) # 根据页码号获取数据页码对象
         context['current_page'] = int(page) # 将当前页码号封装进context中
         # 获取页码列表
         pages = paginator.page_range
 
     except PageNotAnInteger:
-        object_list = paginator.page(1) # 获取首页数据列表
+        object_list = paginator.page(1) # 获取首页数据页码对象
         context['current_page'] = 1
         pages = paginator.page_range
 

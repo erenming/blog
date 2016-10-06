@@ -11,9 +11,11 @@
                 <br>
                 <p class="lead">{{ article.body | safe}}</p>
             </div>
-            <div>
 
-            </div>
+            <hr>
+
+            {% include 'blog/comment.html' %}
+
         </div>
 
             <!-- 博客旁列 -->
