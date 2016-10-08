@@ -9,6 +9,11 @@
         <div class="col-md-8">
             <!-- 博客正文实体 -->
             <h1 class="page-header">
+                {% if cate_name %}
+                    分类：{{ cate_name }}
+                {% else %}
+                    我的文章
+                {% endif %}
             </h1>
 
             <!-- 博客正文 -->

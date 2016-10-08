@@ -61,6 +61,8 @@ class CategoryView(ListView):
     template_name = 'blog/index.html'
     context_object_name = "article_list"
 
+
+
     def get_queryset(self):
         article_list = Article.objects.filter(category=self.kwargs['cate_id'], status='p')
         for article in article_list:
@@ -69,6 +71,9 @@ class CategoryView(ListView):
 
     def get_context_data(self, **kwargs):
         kwargs['category_list'] = Category.objects.all().order_by('name')
+        name = get_object_or_404(Category, pk=self.kwargs['cate_id'])
+        kwargs['cate_name'] = name
+
         return super(CategoryView, self).get_context_data(**kwargs)
 
 # class CommentPostView(FormView):
