@@ -22,3 +22,5 @@ class BlogCommentForm(forms.ModelForm):
                                           }),
         }
 
+
+

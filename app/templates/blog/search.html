@@ -17,27 +17,31 @@
             </h1>
 
             <!-- 博客正文 -->
-            <div>
-                {% load paginate_tags %}
-                {% paginate article_list 1 %}
-                {% for article in article_list %}
-                    <h2>
-                        <a href="{% url 'app:detail' article.pk %}">{{ article.title }}</a>
-                    </h2>
-                    <p class="lead">
-                        by <a href="index.php">Tom Ming</a>
-                    </p>
-                    <p><span class="glyphicon glyphicon-time"></span> {{ article.created_time }}</p>
-                    <hr>
-                    <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-                    <hr>
-                    <p>{{ article.body | safe }}</p>
-                    <a class="btn btn-primary" href="{% url 'app:detail' article.pk %}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-                    <!--<span class="comments-link"><a href="{% url 'app:detail' article.pk%}" >{{ num_comments }} 评论</a></span>-->
-                    <!--<span class="post-views"><a href="#">{{ article.views }} 阅读</a></span>-->
-                    <hr>
-                {% endfor %}
-            </div>
+            {% if article_list %}
+                <div>
+                    {% load paginate_tags %}
+                    {% paginate article_list 1 %}
+                    {% for article in article_list %}
+                        <h2>
+                            <a href="{% url 'app:detail' article.pk %}">{{ article.title }}</a>
+                        </h2>
+                        <p class="lead">
+                            by <a href="index.php">Tom Ming</a>
+                        </p>
+                        <p><span class="glyphicon glyphicon-time"></span> {{ article.created_time }}</p>
+                        <hr>
+                        <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                        <hr>
+                        <p>{{ article.body | safe }}</p>
+                        <a class="btn btn-primary" href="{% url 'app:detail' article.pk %}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        <!--<span class="comments-link"><a href="{% url 'app:detail' article.pk%}" >{{ num_comments }} 评论</a></span>-->
+                        <!--<span class="post-views"><a href="#">{{ article.views }} 阅读</a></span>-->
+                        <hr>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <h3>抱歉，无搜索内容</h3>
+            {% endif %}
             <div>
                 {% include 'blog/pagination.html' %}
             </div>

@@ -2,11 +2,11 @@ from django.shortcuts import render
 from .models import Article, Category, BlogComment
 from .forms import BlogCommentForm
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, get_list_or_404
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView
-import markdown2
+import markdown2, re
 
 # Create your views here.
 
@@ -121,3 +121,17 @@ def CommentView(request, article_id):
             new_record.save()
             comment = get_object_or_404(BlogComment, pk=new_record.pk)
             return redirect('app:detail', article_id=article_id)
+
+def blog_search(request,):
+
+    search_for = request.GET['search_for']
+
+    if search_for:
+        results = []
+        article_list = get_list_or_404(Article)
+        for article in article_list:
+            if re.match(search_for, article.title):
+                results.append(article)
+        return render(request, 'blog/search.html', {'article_list': results})
+    else:
+        return redirect('app:index')
