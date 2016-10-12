@@ -1,0 +1,14 @@
+<div class="well">
+    <h4>博客目录</h4>
+    <div class="row">
+        <div class="col-lg-6">
+            <ul class="list-unstyled">
+            {% for category in category_list %}
+                <li class="cat-item"><a
+                        href="{% url 'app:category' category.pk %}">{{ category.name }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

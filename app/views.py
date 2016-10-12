@@ -129,9 +129,11 @@ def blog_search(request,):
     if search_for:
         results = []
         article_list = get_list_or_404(Article)
+        category_list = get_list_or_404(Category)
         for article in article_list:
             if re.match(search_for, article.title):
                 results.append(article)
-        return render(request, 'blog/search.html', {'article_list': results})
+        return render(request, 'blog/search.html', {'article_list': results,
+                                                    'category_list': category_list})
     else:
         return redirect('app:index')
