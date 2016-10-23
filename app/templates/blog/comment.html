@@ -1,13 +1,13 @@
 
-<div class="col-sm-8 col-md-8 col-md-offset-2">
+<div class="col-sm-8">
     <p class="'lead">评论详情</p>
     <form method="post" action="{% url 'app:comment' article.pk %}">
         {% csrf_token %}
-            {% for field in form %}
-            {{ field }}
-            {{ field.errors }}
-            <br>
-            {% endfor %}
+        {% for field in form %}
+        {{ field }}
+        {{ field.errors }}
+        <br>
+        {% endfor %}
         <button type="submit">评论</button>
     </form>
     <hr>

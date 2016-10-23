@@ -9,7 +9,7 @@ class Article(models.Model):
         ('p', 'Published'),
     )   # 文章的状态
 
-    title = models.CharField('标题', max_length=70)
+    title = models.CharField('标题', max_length=100)
     body = models.TextField('正文')
 
     created_time = models.DateTimeField('创建时间', auto_now_add=True)
