@@ -131,7 +131,7 @@ def blog_search(request,):
         article_list = get_list_or_404(Article)
         category_list = get_list_or_404(Category)
         for article in article_list:
-            if re.match(search_for, article.title):
+            if re.findall(search_for, article.title):
                 results.append(article)
         for article in results:
             article.body = markdown2.markdown(article.body, )
