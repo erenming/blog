@@ -134,6 +134,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = ("/home/tom/django/blog/app/static",)
+
 
 # Settings for django-bootstrap3
 BOOTSTRAP3 = {

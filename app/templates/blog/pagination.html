@@ -1,18 +1,18 @@
 
 <ul class='pagination pagination-lg'>
     {% if article_list.has_previous %}
-        <li><a href="/?page={{ article_list.previous_page_number }}">&laquo;</a></li>
+        <li><a href="?page={{ article_list.previous_page_number }}">&laquo;</a></li>
     {% else %}
         <li><a class="'disabled">&laquo;</a></li>
     {% endif %}
 
 
     {% for page in pages %}
-        <li><a href="/?page={{ page }}">{{ page }}</a></li>
+        <li><a href="?page={{ page }}">{{ page }}</a></li>
     {% endfor %}
 
     {% if article_list.has_next %}
-        <li><a href="/?page={{ article_list.next_page_number }}">&raquo;</a></li>
+        <li><a href="?page={{ article_list.next_page_number }}">&raquo;</a></li>
     {% else %}
         <li><a class="'disabled">&raquo;</a></li>
     {% endif %}

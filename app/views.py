@@ -1,11 +1,9 @@
 from django.shortcuts import render
 from .models import Article, Category, BlogComment
 from .forms import BlogCommentForm
-from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, get_list_or_404
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import FormView
 import markdown2, re
 
 # Create your views here.
@@ -76,34 +74,6 @@ class CategoryView(ListView):
 
         return super(CategoryView, self).get_context_data(**kwargs)
 
-# class CommentPostView(FormView):
-#     from_class = BlogCommentForm
-#     template_name = 'blog/detail.html'
-#
-#     def form_valid(self, form):
-#         '''
-#         验证表单数据是否合法
-#         '''
-#         # 根据url传入的参数获取被评论文章
-#         target_article = get_object_or_404(Article, pk=self.kwargs['article_id'])
-#
-#         comment = form.save(commit=False)
-#         comment.article = target_article
-#         comment.save()
-#
-#         self.success_url = target_article.get_absolute_url()
-#         return render(self.request, self.success_url, {'article_id': target_article.pk})
-#
-#
-#     def form_invalid(self, form):
-#
-#         target_article = get_object_or_404(Article, pk=self.kwargs['article_id'])
-#
-#         return render(self.request, 'blog/detail.html', {
-#             'form': form,
-#             'article': target_article,
-#             'comment_list': target_article.blogcomment_set.all(),
-#         })
 
 def CommentView(request, article_id):
     if request.method == 'POST':
@@ -119,8 +89,8 @@ def CommentView(request, article_id):
                                  body=body,
                                 article=article)
             new_record.save()
-            comment = get_object_or_404(BlogComment, pk=new_record.pk)
             return redirect('app:detail', article_id=article_id)
+
 
 def blog_search(request,):
 
