@@ -133,6 +133,8 @@ def blog_search(request,):
         for article in article_list:
             if re.match(search_for, article.title):
                 results.append(article)
+        for article in results:
+            article.body = markdown2.markdown(article.body, )
         return render(request, 'blog/search.html', {'article_list': results,
                                                     'category_list': category_list})
     else:

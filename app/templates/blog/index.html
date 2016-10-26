@@ -26,13 +26,13 @@
                         <a href="{% url 'app:detail' article.pk %}">{{ article.title }}</a>
                     </h2>
                     <p class="lead">
-                        by <a href="index.php">Tom Ming</a>
+                        by Tom Ming
                     </p>
                     <p><span class="glyphicon glyphicon-time"></span> {{ article.created_time }}</p>
                     <hr>
                     <!--<img class="img-responsive" src="http://placehold.it/900x300" alt="">-->
                     <!--<hr>-->
-                    <p>{{ article.body | safe | truncatewords:3}}</p>
+                    <p>{{ article.body | safe | truncatewords:20}}</p>
 
                     <!--<span class="comments-link"><a href="{% url 'app:detail' article.pk%}" >{{ num_comments }} 评论</a></span>-->
                     <!--<span class="post-views"><a href="#">{{ article.views }} 阅读</a></span>-->
