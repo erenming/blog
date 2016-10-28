@@ -4,23 +4,24 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8" style ='background-color: #f2f2f2;'>
             <div class="text-center">
                 <h2><a href="{% url 'app:detail' article.pk %}">{{ article.title }}</a></h2>
                 <p><span class="glyphicon glyphicon-time"></span> {{ article.created_time }}</p>
                 <br>
             </div>
+            <span class="post-views">阅读量: {{ article.views }}</span>
             <div>
             <p class="lead">{{ article.body | safe}}</p>
             </div>
 
-            <hr>
+            <hr><br><br>
 
             {% include 'blog/comment.html' %}
 
         </div>
 
-        <!-- 博客旁列 -->
+       <!-- 博客旁列 -->
         <div class="col-md-4">
 
             <!-- Blog Search Well -->
@@ -45,7 +46,7 @@
 
             <!-- Side Widget Well -->
             <div class="well">
-                <h4>博客介绍</h4>
+                <h4><span class="glyphicon glyphicon-align-justify"></span>    博客介绍</h4>
                 <p>欢迎来到我的个人博客，此博客主要用于记录技术随笔，个人感想等各种杂文。由于初学编程，个中纰漏，望请指出，谢谢！</p>
             </div>
 

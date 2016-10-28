@@ -57,7 +57,6 @@ class Category(models.Model):
 
 class BlogComment(models.Model):
     user_name = models.CharField('评论者名字', max_length=100)
-    user_email = models.EmailField('评论者邮箱', max_length=255)
     body = models.TextField('评论内容')
     created_time = models.DateTimeField('评论发表时间', auto_now_add=True)
     article = models.ForeignKey('Article', verbose_name='评论所属文章', on_delete=models.CASCADE)

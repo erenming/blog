@@ -31,9 +31,9 @@ class IndexView(ListView):
 
 
 class ArticleDetailView(DetailView):
-    '''
+    """
     显示文章详情
-    '''
+    """
     model = Article
     template_name = 'blog/detail.html'
     context_object_name = "article"
@@ -44,6 +44,9 @@ class ArticleDetailView(DetailView):
     # 从数据库中获取id为pk_url_kwargs的对象
     def get_object(self, queryset=None):
         obj = super(ArticleDetailView, self).get_object()
+        # 点击一次阅读量增加一次
+        obj.views += 1
+        obj.save()
         obj.body = markdown2.markdown(obj.body)
         return obj
 
@@ -80,12 +83,10 @@ def CommentView(request, article_id):
         form = BlogCommentForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['user_name']
-            email = form.cleaned_data['user_email']
             body = form.cleaned_data['body']
 
             article = get_object_or_404(Article, pk=article_id)
             new_record = BlogComment(user_name=name,
-                                 user_email=email,
                                  body=body,
                                 article=article)
             new_record.save()
@@ -109,3 +110,6 @@ def blog_search(request,):
                                                     'category_list': category_list})
     else:
         return redirect('app:index')
+
+def about_me(request,):
+    return render(request, 'blog/about.html')

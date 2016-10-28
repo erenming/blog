@@ -19,8 +19,6 @@
             <!-- 博客正文 -->
             {% if article_list %}
                 <div>
-                    <!--{% load paginate_tags %}-->
-                    <!--{% paginate article_list 10 %}-->
                     {% for article in article_list %}
                         <h2>
                             <a href="{% url 'app:detail' article.pk %}">{{ article.title }}</a>
@@ -29,26 +27,16 @@
                             by Tom Ming</a>
                         </p>
                         <p><span class="glyphicon glyphicon-time"></span> {{ article.created_time }}</p>
-                    <!--    <hr>
-                        <p>{{ article.body | safe | truncatewords:20}}</p>
-
-                        <a class="btn btn-primary" href="{% url 'app:detail' article.pk %}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-                        -->
-                        <!--<span class="comments-link"><a href="{% url 'app:detail' article.pk%}" >{{ num_comments }} 评论</a></span>-->
-                        <!--<span class="post-views"><a href="#">{{ article.views }} 阅读</a></span>-->
                         <hr>
                     {% endfor %}
                 </div>
             {% else %}
                 <h3>抱歉，无搜索内容</h3>
             {% endif %}
-            <!--<div>-->
-                <!--{% include 'blog/pagination.html' %}-->
-            <!--</div>-->
 
         </div>
 
-        <!-- 博客旁列 -->
+       <!-- 博客旁列 -->
         <div class="col-md-4">
 
             <!-- Blog Search Well -->
@@ -73,8 +61,8 @@
 
             <!-- Side Widget Well -->
             <div class="well">
-                <h4>Side Widget Well</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+                <h4><span class="glyphicon glyphicon-align-justify"></span>    博客介绍</h4>
+                <p>欢迎来到我的个人博客，此博客主要用于记录技术随笔，个人感想等各种杂文。由于初学编程，个中纰漏，望请指出，谢谢！</p>
             </div>
 
         </div>

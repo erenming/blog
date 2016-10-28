@@ -1,6 +1,6 @@
 
-<div class="col-sm-8">
-    <p class="'lead">评论详情</p>
+<div class="col-sm-12" style ='background-color: #ccffcc;'>
+    <h4 class="'lead">评论详情</h4>
     <form method="post" action="{% url 'app:comment' article.pk %}">
         {% csrf_token %}
         {% for field in form %}
