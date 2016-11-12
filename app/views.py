@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Article, Category, BlogComment
+from .models import Article, Category, BlogComment, Tag
 from .forms import BlogCommentForm
 from django.shortcuts import get_object_or_404, redirect, get_list_or_404
 from django.views.generic.list import ListView
@@ -7,6 +7,7 @@ from django.views.generic.detail import DetailView
 import markdown2, re
 
 # Create your views here.
+
 
 class IndexView(ListView):
     template_name = 'blog/index.html'
@@ -27,6 +28,7 @@ class IndexView(ListView):
     # 为上下文添加额外的变量，以便在模板中访问
     def get_context_data(self, **kwargs):
         kwargs['category_list'] = Category.objects.all().order_by('name')
+        kwargs['tag_list'] = Tag.objects.all().order_by('name')
         return super(IndexView, self).get_context_data(**kwargs)
 
 
@@ -55,6 +57,7 @@ class ArticleDetailView(DetailView):
         kwargs['comment_list'] = self.object.blogcomment_set.all()
         kwargs['form'] = BlogCommentForm()
         kwargs['category_list'] = Category.objects.all().order_by('name')
+        kwargs['tag_list'] = Tag.objects.all().order_by('name')
         return super(ArticleDetailView, self).get_context_data(**kwargs)
 
 
@@ -72,6 +75,7 @@ class CategoryView(ListView):
 
     def get_context_data(self, **kwargs):
         kwargs['category_list'] = Category.objects.all().order_by('name')
+        kwargs['tag_list'] = Tag.objects.all().order_by('name')
         name = get_object_or_404(Category, pk=self.kwargs['cate_id'])
         kwargs['cate_name'] = name
 
@@ -106,10 +110,35 @@ def blog_search(request,):
                 results.append(article)
         for article in results:
             article.body = markdown2.markdown(article.body, )
+        tag_list = Tag.objects.all().order_by('name')
         return render(request, 'blog/search.html', {'article_list': results,
-                                                    'category_list': category_list})
+                                                    'category_list': category_list,
+                                                    'tag_list': tag_list})
     else:
         return redirect('app:index')
 
+
 def about_me(request,):
     return render(request, 'blog/about.html')
+
+
+class TagView(ListView):
+    template_name = 'blog/index.html'
+    context_object_name = 'article_list'
+
+    def get_queryset(self):
+        """
+        根据指定的标签名获得该标签下的全部文章
+        """
+        article_list = Article.objects.filter(tags=self.kwargs['tag_id'], status='p')
+        for article in article_list:
+            article.body = markdown2.markdown(article.body, extras=['fenced-code-blocks'], )
+        return article_list
+
+    def get_context_data(self, **kwargs):
+        kwargs['tag_list'] = Tag.objects.all().order_by('name')
+        kwargs['category_list'] = Category.objects.all().order_by('name')
+        name = get_object_or_404(Tag, pk=self.kwargs['tag_id'])
+        kwargs['tag_name'] = name
+        return super(TagView, self).get_context_data(**kwargs)
+

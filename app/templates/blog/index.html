@@ -11,6 +11,8 @@
             <h1 class="page-header">
                 {% if cate_name %}
                     分类：{{ cate_name }}
+                {% elif tag_name %}
+                    标签: {{ tag_name }}
                 {% else %}
                     我的文章
                 {% endif %}
@@ -62,6 +64,7 @@
 
             <!-- Blog Categories Well -->
             {% include "blog/category.html" %}
+
 
             <!-- Side Widget Well -->
             <div class="well">
