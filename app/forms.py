@@ -1,5 +1,5 @@
 from django import forms
-from .models import Article, BlogComment
+from .models import Article, BlogComment, Suggest
 
 
 class BlogCommentForm(forms.ModelForm):
@@ -19,6 +19,18 @@ class BlogCommentForm(forms.ModelForm):
         }
 
 
+class SuggestForm(forms.ModelForm):
+    class Meta:
+        model = Suggest
+        fields = ['suggest']
+        widgets = {
+            'suggest': forms.Textarea(attrs={
+                'placeholder': '让我来说两句',
+                'class': 'form-control',
+                'rows': 4,
+                'cols': 80,
+                })
+        }
 
 
 

@@ -1,10 +1,12 @@
 from django.shortcuts import render
-from .models import Article, Category, BlogComment, Tag
-from .forms import BlogCommentForm
+from .models import Article, Category, BlogComment, Tag, Suggest
+from .forms import BlogCommentForm, SuggestForm
 from django.shortcuts import get_object_or_404, redirect, get_list_or_404
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import FormView
 import markdown2, re
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -118,8 +120,8 @@ def blog_search(request,):
         return redirect('app:index')
 
 
-def about_me(request,):
-    return render(request, 'blog/about.html')
+def thanks(request,):
+    return render(request, 'blog/thanks.html')
 
 
 class TagView(ListView):
@@ -141,4 +143,38 @@ class TagView(ListView):
         name = get_object_or_404(Tag, pk=self.kwargs['tag_id'])
         kwargs['tag_name'] = name
         return super(TagView, self).get_context_data(**kwargs)
+
+
+# class SuggestView(FormView):
+#     template_name = 'blog/about.html'
+#     form_class = SuggestForm
+#     success_url = '/thanks/'
+#
+#     def form_valid(self, form):
+#         suggest_data = form.cleaned_data['suggest']
+#         obj = Suggest.get_object()
+#         obj.suggest = suggest_data
+#         obj.save()
+#
+#         send_mail('访客意见', suggest_data, 'tomming233@sina.com', ['tomming233@163.com'], fail_silently=False)
+#         return super(SuggestView, self).form_valid(form)
+#
+#     def get_context_data(self, **kwargs):
+#         kwargs['form'] = SuggestForm()
+#         return super(SuggestView, self).get_context_data(**kwargs)
+
+
+def suggest_view(request):
+    form = SuggestForm()
+    print(1)
+    if request.method == 'POST':
+        form = SuggestForm(request.POST)
+        if form.is_valid():
+            suggest_data = form.cleaned_data['suggest']
+            send_mail('访客意见', suggest_data, 'tomming233@sina.com', ['tomming233@163.com'], fail_silently=False)
+            new_record = Suggest(suggest=suggest_data)
+            new_record.save()
+            # send_mail('访客意见', suggest_data, 'tomming233@sina.com', ['tomming233@163.com'], fail_silently=False)
+            return redirect('app:thanks')
+    return render(request, 'blog/about.html', {'form': form})
 

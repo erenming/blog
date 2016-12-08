@@ -78,3 +78,14 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Suggest(models.Model):
+    """
+    意见存储
+    """
+    suggest = models.TextField('意见', max_length=200)
+    suggest_time = models.DateTimeField('提出时间', auto_now_add=True)
+
+    def __str__(self):
+        return self.suggest

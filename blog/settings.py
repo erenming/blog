@@ -81,21 +81,32 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
+# postgresql
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'blog',
-        'USER': 'root',
-        'PASSWORD': '123',
+        'USER': 'tom',
         'HOST': '127.0.0.1',
-        'PORT': '3306',
-        'OPTIONS': {
-            'sql_mode': 'traditional',
-            'charset': 'utf8mb4',
-        }
     }
 }
 
+
+# # mysql
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'blog',
+#         'USER': 'root',
+#         'PASSWORD': '123',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306',
+#         'OPTIONS': {
+#             'sql_mode': 'traditional',
+#             'charset': 'utf8mb4',
+#         }
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -144,3 +155,12 @@ BOOTSTRAP3 = {
     'required_css_class': 'bootstrap3-required',
     'javascript_in_head': True,
 }
+
+# email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = "smtp.sina.com"
+EMAIL_HOST_PASSWORD = "jwm1993.."
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER = "tomming233@sina.com"
+EMAIL_PORT = 25
+EMAIL_USE_TLS = True
