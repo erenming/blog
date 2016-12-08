@@ -171,10 +171,10 @@ def suggest_view(request):
         form = SuggestForm(request.POST)
         if form.is_valid():
             suggest_data = form.cleaned_data['suggest']
-            send_mail('访客意见', suggest_data, 'tomming233@sina.com', ['tomming233@163.com'], fail_silently=False)
             new_record = Suggest(suggest=suggest_data)
             new_record.save()
-            # send_mail('访客意见', suggest_data, 'tomming233@sina.com', ['tomming233@163.com'], fail_silently=False)
+            print('已存入数据库')
+            send_mail('访客意见', suggest_data, 'tomming233@sina.com', ['tomming233@163.com'], fail_silently=False)
             return redirect('app:thanks')
     return render(request, 'blog/about.html', {'form': form})
 
