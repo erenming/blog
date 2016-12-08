@@ -25,7 +25,7 @@ class SuggestForm(forms.ModelForm):
         fields = ['suggest']
         widgets = {
             'suggest': forms.Textarea(attrs={
-                'placeholder': '让我来说两句',
+                'placeholder': '写下你的意见吧~',
                 'class': 'form-control',
                 'rows': 4,
                 'cols': 80,
