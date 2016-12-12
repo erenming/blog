@@ -4,8 +4,8 @@ from .forms import BlogCommentForm, SuggestForm
 from django.shortcuts import get_object_or_404, redirect, get_list_or_404
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import FormView
-import markdown2, re
+import markdown2
+import re
 from django.core.mail import send_mail
 
 # Create your views here.
@@ -66,8 +66,6 @@ class ArticleDetailView(DetailView):
 class CategoryView(ListView):
     template_name = 'blog/index.html'
     context_object_name = "article_list"
-
-
 
     def get_queryset(self):
         article_list = Article.objects.filter(category=self.kwargs['cate_id'], status='p')
