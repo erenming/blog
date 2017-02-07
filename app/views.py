@@ -74,7 +74,7 @@ class CategoryView(ListView):
     def get_queryset(self):
         article_list = Article.objects.filter(category=self.kwargs['cate_id'], status='p')
         for article in article_list:
-            article.body = markdown2.markdown(article.body,)
+            article.body = markdown.markdown(article.body,)
         return article_list
 
     def get_context_data(self, **kwargs):
@@ -113,7 +113,7 @@ def blog_search(request,):
             if re.findall(search_for, article.title):
                 results.append(article)
         for article in results:
-            article.body = markdown2.markdown(article.body, )
+            article.body = markdown.markdown(article.body, )
         tag_list = Tag.objects.all().order_by('name')
         return render(request, 'blog/search.html', {'article_list': results,
                                                     'category_list': category_list,
@@ -136,7 +136,7 @@ class TagView(ListView):
         """
         article_list = Article.objects.filter(tags=self.kwargs['tag_id'], status='p')
         for article in article_list:
-            article.body = markdown2.markdown(article.body, extras=['fenced-code-blocks'], )
+            article.body = markdown.markdown(article.body, extras=['fenced-code-blocks'], )
         return article_list
 
     def get_context_data(self, **kwargs):
@@ -175,7 +175,6 @@ def suggest_view(request):
             suggest_data = form.cleaned_data['suggest']
             new_record = Suggest(suggest=suggest_data)
             new_record.save()
-            print('已存入数据库')
             send_mail('访客意见', suggest_data, 'tomming233@sina.com', ['tomming233@163.com'], fail_silently=False)
             return redirect('app:thanks')
     return render(request, 'blog/about.html', {'form': form})
