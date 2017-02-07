@@ -4,7 +4,7 @@ from .forms import BlogCommentForm, SuggestForm
 from django.shortcuts import get_object_or_404, redirect, get_list_or_404
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-import markdown2
+import markdown
 import re
 from django.core.mail import send_mail
 
@@ -24,7 +24,7 @@ class IndexView(ListView):
         """
         article_list = Article.objects.filter(status='p')
         for article in article_list:
-            article.body = markdown2.markdown(article.body,)
+            article.body = markdown.markdown(article.body,)
         return article_list
 
     # 为上下文添加额外的变量，以便在模板中访问
@@ -51,7 +51,11 @@ class ArticleDetailView(DetailView):
         # 点击一次阅读量增加一次
         obj.views += 1
         obj.save()
-        obj.body = markdown2.markdown(obj.body)
+        obj.body = markdown.markdown(obj.body, safe_mode='escape',
+        extensions=[
+            'markdown.extensions.nl2br',
+            'markdown.extensions.fenced_code'
+        ])
         return obj
 
     # 新增form到上下文
