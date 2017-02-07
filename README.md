@@ -46,7 +46,7 @@ class ArticleDetailView(DetailView):
 
 ------------
 
->由于markdown2不能解析```test```代码块，故将其替换为了markdown
+>由于markdown2不能解析篱笆型代码块，故将其替换为了markdown
 #### 记录于2017-02-7
 
 --------
