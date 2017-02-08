@@ -6,9 +6,12 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 import markdown
 import re
+import logging
 from django.core.mail import send_mail
 
 # Create your views here.
+
+logger = logging.getLogger(__name__)
 
 
 class IndexView(ListView):
@@ -168,14 +171,16 @@ class TagView(ListView):
 
 def suggest_view(request):
     form = SuggestForm()
-    print(1)
     if request.method == 'POST':
         form = SuggestForm(request.POST)
         if form.is_valid():
             suggest_data = form.cleaned_data['suggest']
             new_record = Suggest(suggest=suggest_data)
             new_record.save()
-            send_mail('访客意见', suggest_data, 'tomming233@sina.com', ['tomming233@163.com'], fail_silently=False)
+            try:
+                send_mail('访客意见', suggest_data, 'tomming233@sina.com', ['tomming233@163.com'], fail_silently=False)
+            except Exception as e:
+                logger.error("邮件发送失败: {}".format(e))
             return redirect('app:thanks')
     return render(request, 'blog/about.html', {'form': form})
 
