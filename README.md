@@ -56,4 +56,9 @@ class ArticleDetailView(DetailView):
 
 --------
 
+>添加Redis用以缓存文章界面
+#### 记录于2017-02-21
+
+--------
+
   [2]: http://182.254.129.224/
