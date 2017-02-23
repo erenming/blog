@@ -60,15 +60,16 @@ class ArticleDetailView(DetailView):
 
 --------
 
->添加Redis用以缓存文章界面
+>添加[Redis][4]用以缓存文章界面
 #### 记录于2017-02-21
 
 --------
 
 >添加[Celery][3]异步处理请求(我用来处理发送邮件时, 可能造成的阻塞(ps.没什么访问量，其实并不会发生- -))
-#### 记录于2017-02-21
+#### 记录于2017-02-23
 
 --------
 
   [2]: http://182.254.129.224/
   [3]: http://docs.celeryproject.org/en/latest/index.html
+  [4]: https://redis.io/
