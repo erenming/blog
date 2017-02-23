@@ -22,14 +22,18 @@
 ```python
 class ArticleDetailView(DetailView):
 	......
-    # 从数据库中获取id为pk_url_kwargs的对象
-	def get_object(self, queryset=None):
-		obj = super(ArticleDetailView, self).get_object()
-		# 点击一次阅读量增加一次
-		obj.views += 1
-		obj.save()
-		obj.body = markdown2.markdown(obj.body)
-		return obj
+ # 从数据库中获取id为pk_url_kwargs的对象
+    def get_object(self, queryset=None):
+        obj = super(ArticleDetailView, self).get_object()
+        # 点击一次阅读量增加一次
+        obj.views += 1
+        obj.save()
+        obj.body = markdown.markdown(obj.body, safe_mode='escape',
+        extensions=[
+            'markdown.extensions.nl2br',
+            'markdown.extensions.fenced_code'
+        ])
+        return obj
 	......
 ```
 ####记录于2016-10-28
@@ -61,4 +65,10 @@ class ArticleDetailView(DetailView):
 
 --------
 
+>添加[Celery][3]异步处理请求(我用来处理发送邮件时, 可能造成的阻塞(ps.没什么访问量，其实并不会发生- -))
+#### 记录于2017-02-21
+
+--------
+
   [2]: http://182.254.129.224/
+  [3]: http://docs.celeryproject.org/en/latest/index.html

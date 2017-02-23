@@ -169,9 +169,8 @@ BOOTSTRAP3 = {
 
 # email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = "smtp.sina.com"
-EMAIL_HOST_PASSWORD = "my_password"
+EMAIL_HOST_PASSWORD = 'hided'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER = "tomming233@sina.com"
 EMAIL_PORT = 25
 EMAIL_USE_TLS = True
@@ -242,3 +241,14 @@ LOGGING = {
         },
     }
 }
+
+# Celery settings
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+
+#: Only add pickle to this list if your broker is secured
+#: from unwanted access (see userguide/security.html)
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_ENABLE_UTC = True
+CELERY_TIMEZONE = TIME_ZONE
