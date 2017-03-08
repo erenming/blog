@@ -1,3 +1,6 @@
+amqp==2.1.4
+billiard==3.5.0.2
+celery==4.0.2
 Django==1.10.1
 django-appconf==1.0.2
 django-bootstrap3==7.1.0
@@ -6,10 +9,14 @@ django-haystack==2.5.0
 django-markdown-deux==1.0.5
 django-model-utils==2.5.2
 django-notifications-hq==1.2
+django-redis==4.7.0
 django-registration-redux==1.4
 gunicorn==19.6.0
 jieba==0.38
 jsonfield==1.0.3
+kombu==4.0.2
 Markdown==2.6.8
 psycopg2==2.6.2
 pytz==2016.4
+redis==2.10.5
+vine==1.1.3
