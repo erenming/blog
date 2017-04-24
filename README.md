@@ -76,7 +76,7 @@ class ArticleDetailView(DetailView):
 --------
 
 >用docker重新部署了我的django博客应用，并已写成[教程][6]供大家参考
-#### 记录于2017-04-04
+#### 记录于2017-04-24
 
 --------
 
