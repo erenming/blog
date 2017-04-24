@@ -1,7 +1,7 @@
 ## 个人博客
- 
+
 —— 基于django1.10以及bootstrap3.0
- 
+
 ----------
 ### 简介
 > 目前博客功能拥有基本的分页、评论、详细阅读的功能
@@ -75,7 +75,13 @@ class ArticleDetailView(DetailView):
 
 --------
 
+>用docker重新部署了我的django博客应用，并已写成[教程][6]供大家参考
+#### 记录于2017-04-04
+
+--------
+
   [2]: http://182.254.129.224/
   [3]: http://docs.celeryproject.org/en/latest/index.html
   [4]: https://redis.io/
   [5]: https://djangosnippets.org/snippets/264/
+  [6]: https://tomming233.github.io/2017/04/24/%E7%94%A8docker%E9%83%A8%E7%BD%B2django%E5%BA%94%E7%94%A8/
