@@ -94,33 +94,33 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-# postgresql
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'blog',
-        'USER': 'tom',
-        # 'HOST': '127.0.0.1',
-        'PASSWORD': ''
-    }
-}
-
-
-# # mysql
+# # postgresql
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 #         'NAME': 'blog',
-#         'USER': 'root',
-#         'PASSWORD': '123',
-#         'HOST': '127.0.0.1',
-#         'PORT': '3306',
-#         'OPTIONS': {
-#             'sql_mode': 'traditional',
-#             'charset': 'utf8mb4',
-#         }
+#         'USER': 'tom',
+#         # 'HOST': '127.0.0.1',
+#         'PASSWORD': ''
 #     }
 # }
+
+
+# mysql
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'blog',
+        'USER': 'root',
+        'PASSWORD': '123',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+            'charset': 'utf8mb4',
+        }
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators

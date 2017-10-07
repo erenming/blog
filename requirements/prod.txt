@@ -11,5 +11,4 @@ gunicorn==19.6.0
 jieba==0.38
 jsonfield==1.0.3
 Markdown==2.6.8
-psycopg2==2.6.2
 pytz==2016.4

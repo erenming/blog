@@ -16,7 +16,7 @@ jieba==0.38
 jsonfield==1.0.3
 kombu==4.0.2
 Markdown==2.6.8
-psycopg2==2.6.2
+PyMySQL=0.7.11
 pytz==2016.4
 redis==2.10.5
 vine==1.1.3
