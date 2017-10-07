@@ -85,7 +85,7 @@ class ArticleDetailView(DetailView):
 - (可选)redis 安装， [安装参考][8]，然后启动redis
 - 新建一个虚拟环境，然后安装相关模块```pip install -r requirements/dev.txt```
 - 初始化表```python manage.py migrate```
-- 最后运行``python manage.py runserver```
+- 最后运行```python manage.py runserver```
 #### 记录于2017-10-07
 
 --------
