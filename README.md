@@ -86,7 +86,7 @@ class ArticleDetailView(DetailView):
 - 新建一个虚拟环境，然后安装相关模块```pip install -r requirements/dev.txt```
 - 初始化表```python manage.py migrate```
 - 最后运行``python manage.py runserver```
-#### 记录于2017-04-24
+#### 记录于2017-10-07
 
 --------
 
