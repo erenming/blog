@@ -81,11 +81,11 @@ class ArticleDetailView(DetailView):
 --------
 
 >由于此博客的线上版本已下线，需要大家自行clone，然后运行，我这里简单介绍clone下来后，安装方面需要注意的问题
-    - 首先需要安装相关数据库，我这里用mysql做示范(鉴于大家的普遍使用), [ubuntu安装参考][7], 然后创建一个名为blog的数据库
-    - (可选)redis 安装， [安装参考][8]，然后启动redis
-    - 新建一个虚拟环境，然后安装相关模块```pip install -r requirements/dev.txt```
-    - 初始化表```python manage.py migrate```
-    - 最后运行``python manage.py runserver```
+- 首先需要安装相关数据库，我这里用mysql做示范(鉴于大家的普遍使用), [ubuntu安装参考][7], 然后创建一个名为blog的数据库
+- (可选)redis 安装， [安装参考][8]，然后启动redis
+- 新建一个虚拟环境，然后安装相关模块```pip install -r requirements/dev.txt```
+- 初始化表```python manage.py migrate```
+- 最后运行``python manage.py runserver```
 #### 记录于2017-04-24
 
 --------
